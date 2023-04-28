@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="indorsoftjmix">
+        <createTable tableName="EMPLOYEE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_EMPLOYEE"/>
+            </column>
+            <column name="FULL_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="indorsoftjmix">
+        <createTable tableName="PROJECT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PROJECT"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="indorsoftjmix">
+        <createTable tableName="PROJECT_EMPLOYEE_LINK">
+            <column name="EMPLOYEE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PROJECT_EMPLOYEE_LINK"/>
+            </column>
+            <column name="PROJECT_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PROJECT_EMPLOYEE_LINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="indorsoftjmix">
+        <addForeignKeyConstraint baseColumnNames="EMPLOYEE_ID" baseTableName="PROJECT_EMPLOYEE_LINK"
+                                 constraintName="FK_PROEMP_ON_EMPLOYEE" referencedColumnNames="ID"
+                                 referencedTableName="EMPLOYEE"/>
+    </changeSet>
+    <changeSet id="5" author="indorsoftjmix">
+        <addForeignKeyConstraint baseColumnNames="PROJECT_ID" baseTableName="PROJECT_EMPLOYEE_LINK"
+                                 constraintName="FK_PROEMP_ON_PROJECT" referencedColumnNames="ID"
+                                 referencedTableName="PROJECT"/>
+    </changeSet>
+</databaseChangeLog>
